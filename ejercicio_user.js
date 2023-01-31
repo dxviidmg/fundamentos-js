@@ -85,43 +85,71 @@ const validateRegisterData = (registerData) => {
     const {name, lastName, age, gender, phone, email, programmingLanguages} = registerData
     console.log(phone, typeof phone)
     if (name.length < 3){
+        console.log('Name needs a minimum 3 chacater')
         return false
     }
 
     if (splitString(lastName, ' ').length < 2){
+        console.log('lastName needs a minimum 2 words')
         return false
     }
 
-    if (Number.isInteger(age) === false || age < 16 ) {
+    if (Number.isInteger(age) === false) {
+        console.log('age needs to be a integer')
         return false
     }
+
+    if (age < 16 ) {
+        console.log('age needs to be more o equal a 16')
+        return false
+    }
+
+
     if (['H', 'M'].includes(gender) === false){
+        console.log('Gender only accepts H or M')
         return false
     }
 
-    if (/^\d+$/.test(phone) === false || phone.length < 10){
+    if (/^\d+$/.test(phone) === false){
+        console.log('Phone only accepts numbers')
         return false
     }
 
-    if (email.includes('@') === false || email.startsWith('@')){
+    if (phone.length < 10){
+        console.log('Phone needs a minimum of 10 digits')
         return false
     }
 
-    //// checar aqui
+    if (email.startsWith('@')){
+        console.log("Email can't start with @")
+        return false
+    }
+
+    if (email.includes('@') === false){
+        console.log("Missing @ in email")
+        return false
+    }
 
     programmingLanguages.forEach(programmingLanguage => {
 //        console.log(programmingLanguage)
         console.log(programmingLanguage.experienceLevel, typeof programmingLanguage.experienceLevel)
         if ('name' in programmingLanguage === false){
+            console.log("Missing name in programming languaje")
             return false           
         }
         if ('experienceLevel' in programmingLanguage === false){
+            console.log("Missing name in expirence level languaje")
             return false           
         }
-        if ( Number.isInteger(programmingLanguage.experienceLevel) === false || programmingLanguage.experienceLevel <= 0){
-            console.log('que onda')
+        if ( Number.isInteger(programmingLanguage.experienceLevel) === false){
+            console.log('experienceLevel need to be a integer')
             return false
-            console.log('que onda 2')
+        }
+
+
+        if ( Number.isInteger(programmingLanguage.experienceLevel) === false || programmingLanguage.experienceLevel <= 0){
+            console.log('experienceLevel need to be more or equal a 1')
+            return false
         }
 
     });    
