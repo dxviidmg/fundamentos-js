@@ -1,6 +1,6 @@
 // == Data de ejemplo para los ejercicios ================================================================================================
 
-const sampleData = 'Martin|Melo Godínez|25|H|7721018271|martin@actosoft.com.mx|||Javacript|5|||Python|5|||Java|3|||PHP|2|||C#|0|||'
+const sampleData = 'Martin|Melo Godínez|25|H|7721018271|martin@actosoft.com.mx|||Javacript|5|||Python|5|||Java|3|||PHP|2|||C#|1|||'
 
 // == Ejercicio #1 =======================================================================================================================
 /*
@@ -83,7 +83,6 @@ const formatRegisterData = (registerDataString) => {
 const validateRegisterData = (registerData) => {
 //    console.log(registerData)
     const {name, lastName, age, gender, phone, email, programmingLanguages} = registerData
-    console.log(phone, typeof phone)
     if (name.length < 3){
         console.log('Name needs a minimum 3 chacater')
         return false
@@ -94,7 +93,7 @@ const validateRegisterData = (registerData) => {
         return false
     }
 
-    if (Number.isInteger(age) === false) {
+    if (!Number.isInteger(age)) {
         console.log('age needs to be a integer')
         return false
     }
@@ -105,12 +104,12 @@ const validateRegisterData = (registerData) => {
     }
 
 
-    if (['H', 'M'].includes(gender) === false){
+    if (!['H', 'M'].includes(gender)){
         console.log('Gender only accepts H or M')
         return false
     }
 
-    if (/^\d+$/.test(phone) === false){
+    if (!(/^\d+$/.test(phone))){
         console.log('Phone only accepts numbers')
         return false
     }
@@ -125,35 +124,37 @@ const validateRegisterData = (registerData) => {
         return false
     }
 
-    if (email.includes('@') === false){
+    if (!email.includes('@')){
         console.log("Missing @ in email")
         return false
     }
 
-    programmingLanguages.forEach(programmingLanguage => {
-//        console.log(programmingLanguage)
+    const programmingLanguagesValid = programmingLanguages.every(programmingLanguage => {
         console.log(programmingLanguage.experienceLevel, typeof programmingLanguage.experienceLevel)
-        if ('name' in programmingLanguage === false){
+        if (!'name' in programmingLanguage){
             console.log("Missing name in programming languaje")
             return false           
         }
-        if ('experienceLevel' in programmingLanguage === false){
+        if (!'experienceLevel' in programmingLanguage){
             console.log("Missing name in expirence level languaje")
             return false           
         }
-        if ( Number.isInteger(programmingLanguage.experienceLevel) === false){
-            console.log('experienceLevel need to be a integer')
+        if (!Number.isInteger(programmingLanguage.experienceLevel)){
+            console.log('experienceLevel needs to be a integer')
             return false
         }
 
 
-        if ( Number.isInteger(programmingLanguage.experienceLevel) === false || programmingLanguage.experienceLevel <= 0){
-            console.log('experienceLevel need to be more or equal a 1')
+        if (programmingLanguage.experienceLevel <= 0){
+            console.log('experienceLevel needs to be more or equal a 1')
             return false
         }
+
+        return true
 
     });    
-    console.log('que ondaa3')
+
+    if (!programmingLanguagesValid) return false
 
     return true
 
