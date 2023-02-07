@@ -190,17 +190,8 @@ console.log('La data es correcta?', validationResult)
 
 const printRegisterData = (registerData) => {
     console.log(Object.keys(registerData).join('  |  '))
-    console.log(Object.values(registerData).slice(0, -1).join('  |  '))
+    console.log(Object.values(registerData).slice(0, -1).join('  |  '), ' | ', registerData.programmingLanguages.map(user => user.name).join(', '), ' | ')
 
-    xx = Object.values(registerData).slice(-1)
-    console.log('xx', xx)
-
-    xx.forEach(element => {
-    console.log('x', element) 
-    });
-    // Validar la data con la función validateRegisterData
-
-  // Imprimir la tabla
 }
 
 printRegisterData(formatRegisterData(sampleData))
